@@ -12,7 +12,7 @@ namespace ReactiveDemo
         {
             InitializeComponent();
             ViewModel = new AppViewModel();
-
+            
             // We create our bindings here. These are the code behind bindings which allow
             // type safety. The bindings will only become active when the Window is being shown.
             // We register our subscription in our disposableRegistration, this will cause
@@ -27,6 +27,11 @@ namespace ReactiveDemo
                 this.OneWayBind(ViewModel,
                     viewModel => viewModel.IsAvailable,
                     view => view.searchResultsListBox.Visibility)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.IsAvailable,
+                    view => view.donutSpinner.Visibility)
                     .DisposeWith(disposableRegistration);
 
                 this.OneWayBind(ViewModel,
